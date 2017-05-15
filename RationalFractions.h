@@ -6,7 +6,6 @@ class RationalFractions
 	int numerator; //числитель
 	int denominator; //знаменатель
 	char *nameFraction; //имя дроби (как пример, исключительно для динамического выделения памяти)
-	int size; //размер имени
 	static int count;
 	static int NOD(int, int); // наибольший общий делитель
 	static int NOK(int, int); // наименьшее общее кратное
