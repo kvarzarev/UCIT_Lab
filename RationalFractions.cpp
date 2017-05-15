@@ -162,24 +162,27 @@ void setMenu(RationalFractions &f1, RationalFractions &f2, RationalFractions &f3
 		c = select();
 		if (c == 1)
 		{
-			char name[20];
-			cout << "¬ведите им¤ первой дроби:" << endl;
+			char* name = new char[20];
+			cout << "Введите имя первой дроби:" << endl;
 			cin >> name;
 			f1.setNameFraction(name);
+			delete[] name;
 		}
 		if (c == 2)
 		{
-			cout << "¬ведите им¤ второй дроби:" << endl;
-			char name[20];
+			char* name = new char[20];
+			cout << "Введите имя второй дроби:" << endl;
 			cin >> name;
 			f2.setNameFraction(name);
+			delete[] name;
 		}
 		if (c == 3)
 		{
-			cout << "¬ведите им¤ третьей дроби:" << endl;
-			char name[20];
-			cin >> name;
+			char* name = new char[20];
+			cout << "Введите имя третьей дроби:" << endl;
+			сin >> name;
 			f3.setNameFraction(name);
+			delete[] name;
 		}
 		if ((c>=4)&&(c<=7))
 		{
@@ -189,7 +192,7 @@ void setMenu(RationalFractions &f1, RationalFractions &f2, RationalFractions &f3
 		{
 			break;
 		}
-		cout << "»зменени¤ внесены" << endl;
+		cout << "Изменения внесены" << endl;
 		system("pause");
 	} while (c != 0);
 }
@@ -199,7 +202,7 @@ void edition(int c, RationalFractions &f1, RationalFractions &f2)//редакт�
 	int n;
 	if ((c == 4) || (c == 5))
 	{
-		cout << "¬ведите новое значение числител¤" << endl;
+		cout << "Введите новое значение числителя" << endl;
 		cin >> n;
 		if (c == 4)
 		{
