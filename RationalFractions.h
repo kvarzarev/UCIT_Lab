@@ -12,7 +12,7 @@ class RationalFractions
 	void reduction(); //сокращение дроби
 public:
 	RationalFractions(); //конструктор по умолчанию
-	RationalFractions(char*, int, int, int); //конструктор с параметрами
+	RationalFractions(char*, int, int); //конструктор с параметрами
 	RationalFractions(int num, int den);
 	RationalFractions(const RationalFractions& F);//конструктор копирования
 	~RationalFractions(); //деструктор
