@@ -20,8 +20,8 @@ void main()
 	char *fname1 = new char[s1];
 	char *fname2 = new char[s2];
 	setData(fname1, fname2, num1, den1, num2, den2);
-	RationalFractions fract1(fname1, s1, num1, den1);
-	RationalFractions fract2(fname2, s2, num2, den2);
+	RationalFractions fract1(fname1, num1, den1);
+	RationalFractions fract2(fname2, num2, den2);
 	RationalFractions fract3(1,1);
 	menu(fract1, fract2, fract3);
 	delete[] fname1;
