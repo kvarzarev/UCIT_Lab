@@ -12,11 +12,11 @@ RationalFractions::RationalFractions()// метод для конструкто�
 	count++;
 }
 
-RationalFractions::RationalFractions(char* name, int size, int num, int den)// метод для конструктора с параметрами -1
+RationalFractions::RationalFractions(char* name, int num, int den)// метод для конструктора с параметрами -1
 {
 	//cout << "Constructor\n";
-	nameFraction = new char[size];
-	strcpy_s (nameFraction, size, name);
+	nameFraction = new char[strlen(name)+1];
+	strcpy_s (nameFraction, strlen(name)+1, name);
 	numerator = num;
 	if (den != 0) {
 		denominator = den;
