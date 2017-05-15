@@ -3,29 +3,29 @@ using namespace std;
 
 class RationalFractions
 {
-	int numerator; //числитель
-	int denominator; //знаменатель
-	char *nameFraction; //имя дроби (как пример, исключительно для динамического выделения памяти)
-	int size; //размер имени
+	int numerator; //С‡РёСЃР»РёС‚РµР»СЊ
+	int denominator; //Р·РЅР°РјРµРЅР°С‚РµР»СЊ
+	char *nameFraction; //ГЁГ¬Гї Г¤Г°Г®ГЎГЁ (ГЄГ ГЄ ГЇГ°ГЁГ¬ГҐГ°, ГЁГ±ГЄГ«ГѕГ·ГЁГІГҐГ«ГјГ­Г® Г¤Г«Гї Г¤ГЁГ­Г Г¬ГЁГ·ГҐГ±ГЄГ®ГЈГ® ГўГ»Г¤ГҐГ«ГҐГ­ГЁГї ГЇГ Г¬ГїГІГЁ)
+	int size; //Г°Г Г§Г¬ГҐГ° ГЁГ¬ГҐГ­ГЁ
 	static int count;
-	static int NOD(int, int); // наибольший общий делитель
-	static int NOK(int, int); // наименьшее общее кратное
-	void reduction(); //сокращение дроби
+	static int NOD(int, int); // Г­Г ГЁГЎГ®Г«ГјГёГЁГ© Г®ГЎГ№ГЁГ© Г¤ГҐГ«ГЁГІГҐГ«Гј
+	static int NOK(int, int); // Г­Г ГЁГ¬ГҐГ­ГјГёГҐГҐ Г®ГЎГ№ГҐГҐ ГЄГ°Г ГІГ­Г®ГҐ
+	void reduction(); //Г±Г®ГЄГ°Г Г№ГҐГ­ГЁГҐ Г¤Г°Г®ГЎГЁ
 public:
-	RationalFractions(); //конструктор по умолчанию
-	RationalFractions(char*, int, int, int); //конструктор с параметрами
+	RationalFractions(); //ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
+	RationalFractions(char*, int, int, int); //ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ
 	RationalFractions(int num, int den);
-	RationalFractions(const RationalFractions& F);//конструктор копирования
-	~RationalFractions(); //деструктор
-	static int GetCount(); // счетчик количества созданных объектов
-	RationalFractions addition(RationalFractions &); // сложение дробей
-	RationalFractions subtraction(RationalFractions &);// вычитание дробей
-	RationalFractions multiplication(RationalFractions &);// умножение дробей
-	RationalFractions separation(RationalFractions &);// деление дробей
-	bool compare(RationalFractions &);//сравнение дробей
-	void getFraction(); //метод вывода дроби (без имени)
-	void getResult(); //вывод результатов вычислений в виде правильной простой дроби
-	double decimal(); //преобразование простой дроби в десятичную
+	RationalFractions(const RationalFractions& F);//ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЄГ®ГЇГЁГ°Г®ГўГ Г­ГЁГї
+	~RationalFractions(); //Г¤ГҐГ±ГІГ°ГіГЄГІГ®Г°
+	static int GetCount(); // Г±Г·ГҐГІГ·ГЁГЄ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ  Г±Г®Г§Г¤Г Г­Г­Г»Гµ Г®ГЎГєГҐГЄГІГ®Гў
+	RationalFractions addition(RationalFractions &); // Г±Г«Г®Г¦ГҐГ­ГЁГҐ Г¤Г°Г®ГЎГҐГ©
+	RationalFractions subtraction(RationalFractions &);// ГўГ»Г·ГЁГІГ Г­ГЁГҐ Г¤Г°Г®ГЎГҐГ©
+	RationalFractions multiplication(RationalFractions &);// ГіГ¬Г­Г®Г¦ГҐГ­ГЁГҐ Г¤Г°Г®ГЎГҐГ©
+	RationalFractions separation(RationalFractions &);// Г¤ГҐГ«ГҐГ­ГЁГҐ Г¤Г°Г®ГЎГҐГ©
+	bool compare(RationalFractions &);//Г±Г°Г ГўГ­ГҐГ­ГЁГҐ Г¤Г°Г®ГЎГҐГ©
+	void getFraction(); //Г¬ГҐГІГ®Г¤ ГўГ»ГўГ®Г¤Г  Г¤Г°Г®ГЎГЁ (ГЎГҐГ§ ГЁГ¬ГҐГ­ГЁ)
+	void getResult(); //ГўГ»ГўГ®Г¤ Г°ГҐГ§ГіГ«ГјГІГ ГІГ®Гў ГўГ»Г·ГЁГ±Г«ГҐГ­ГЁГ© Гў ГўГЁГ¤ГҐ ГЇГ°Г ГўГЁГ«ГјГ­Г®Г© ГЇГ°Г®Г±ГІГ®Г© Г¤Г°Г®ГЎГЁ
+	double decimal(); //ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГҐ ГЇГ°Г®Г±ГІГ®Г© Г¤Г°Г®ГЎГЁ Гў Г¤ГҐГ±ГїГІГЁГ·Г­ГіГѕ
 	void setNameFraction(char *);
 	void setNumerator(int); 
 	void setDenominator(int);
