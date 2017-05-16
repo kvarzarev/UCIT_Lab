@@ -17,14 +17,21 @@ public:
 	RationalFractions(const RationalFractions& F);//конструктор копирования
 	~RationalFractions(); //деструктор
 	static int GetCount(); // счетчик количества созданных объектов
-	RationalFractions addition(RationalFractions &); // сложение дробей
-	RationalFractions subtraction(RationalFractions &);// вычитание дробей
-	RationalFractions multiplication(RationalFractions &);// умножение дробей
-	RationalFractions separation(RationalFractions &);// деление дробей
-	bool compare(RationalFractions &);//сравнение дробей
+	//перегрузка операторов
+	RationalFractions operator+(RationalFractions &); // перегрузка оператора сложения
+	RationalFractions operator-(RationalFractions &);// перегрузка оператора вычитания
+	RationalFractions operator*(RationalFractions &);// перегрузка оператора умножения
+	RationalFractions operator/(RationalFractions &);// перегрузка оператора деления
+	RationalFractions operator++(int); //перегрузка постфиксного инкремента
+	RationalFractions operator--(); //перегрузка префиксного декремента
+	bool operator==(RationalFractions &);//перегрузка оператора сравнения
+	operator double(); //перегрузка оператора приведения к типу
+	RationalFractions &operator = (RationalFractions &F); //перегрузка оператора присваивания
+	friend ostream& operator <<(ostream&out, RationalFractions&F); //перегрузка оператора cout
+	friend istream& operator >> (istream&in, RationalFractions&F);//перегрузка оператора cin
+	
 	void getFraction(); //метод вывода дроби (без имени)
 	void getResult(); //вывод результатов вычислений в виде правильной простой дроби
-	double decimal(); //преобразование простой дроби в десятичную
 	void setNameFraction(char *);
 	void setNumerator(int); 
 	void setDenominator(int);
