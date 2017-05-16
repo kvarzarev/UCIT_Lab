@@ -6,7 +6,7 @@ RationalFractions::RationalFractions()// метод для конструкто�
 {
 	//cout << "Constructor-defolt\n";
 	nameFraction = new char[100];
-	strcpy_s (nameFraction, 100, "Empty ");
+	strcpy_s(nameFraction, 100, "Empty");
 	numerator = 0;
 	denominator = 1;
 	count++;
@@ -15,8 +15,8 @@ RationalFractions::RationalFractions()// метод для конструкто�
 RationalFractions::RationalFractions(char* name, int num, int den)// метод для конструктора с параметрами -1
 {
 	//cout << "Constructor\n";
-	nameFraction = new char[strlen(name)+1];
-	strcpy_s (nameFraction, strlen(name)+1, name);
+	nameFraction = new char[strlen(name) + 1];
+	strcpy_s(nameFraction, strlen(name) + 1, name);
 	numerator = num;
 	if (den != 0) {
 		denominator = den;
@@ -38,10 +38,10 @@ RationalFractions::RationalFractions(int num, int den)// метод для ко�
 	count++;
 }
 
-RationalFractions::RationalFractions(const RationalFractions& fraction)//метод для конструктора копирования
+RationalFractions::RationalFractions(const RationalFractions &fraction)//метод для конструктора копирования
 {
-	//cout<<"Constructor-copy"<<endl;
-	nameFraction = new char[strlen(fraction.nameFraction)+1];
+	//cout << "Constructor-copy" << endl;
+	nameFraction = new char[strlen(fraction.nameFraction) + 1];
 	strcpy_s(nameFraction, strlen(fraction.nameFraction) + 1, fraction.nameFraction);
 	numerator = fraction.numerator;
 	denominator = fraction.denominator;
@@ -56,8 +56,8 @@ RationalFractions::~RationalFractions()//метод для деструктор�
 }
 
 int RationalFractions::GetCount() //Счетчик Count 
-{ 
-	return count; 
+{
+	return count;
 }
 
 void RationalFractions::getFraction()//вывод данных
@@ -72,7 +72,7 @@ void RationalFractions::getResult()//вывод результатов вычи�
 	{
 		whole = numerator / denominator;
 		numerator = numerator % denominator;
-		cout << whole <<" " << numerator << "/" << denominator;
+		cout << whole << " " << numerator << "/" << denominator;
 	}
 	else
 	{
@@ -99,15 +99,21 @@ int RationalFractions::NOD(int den1, int den2)//наибольший общий 
 
 int RationalFractions::NOK(int den1, int den2)//наименьшее общее кратное
 {
-	if ((den1 > den2) && (den1 % den2 == 0)) 
-	{ return den1; }
-	else if ((den1 < den2) && (den2 % den1 == 0)) 
-	{ return den2; }
+	if ((den1 > den2) && (den1 % den2 == 0))
+	{
+		return den1;
+	}
+	else if ((den1 < den2) && (den2 % den1 == 0))
+	{
+		return den2;
+	}
 	else
 		return den1*den2 / NOD(den1, den2);
 }
 
-RationalFractions RationalFractions::addition(RationalFractions & F)// сложение дробей
+//перегрузка операторов
+
+RationalFractions RationalFractions::operator+(RationalFractions & F)// перегрузка оператора сложения
 {
 	RationalFractions tmp;
 	if (denominator != F.denominator)
@@ -125,7 +131,7 @@ RationalFractions RationalFractions::addition(RationalFractions & F)// слож�
 	return tmp;
 }
 
-RationalFractions RationalFractions::subtraction(RationalFractions & F)//вычитание дробей
+RationalFractions RationalFractions::operator-(RationalFractions & F)//перегрузка оператора вычитания
 {
 	RationalFractions tmp;
 	if (denominator != F.denominator)
@@ -143,7 +149,7 @@ RationalFractions RationalFractions::subtraction(RationalFractions & F)//выч�
 	return tmp;
 }
 
-RationalFractions RationalFractions::multiplication(RationalFractions &F)//умножение дробей
+RationalFractions RationalFractions::operator*(RationalFractions &F)//перегрузка оператора умножения
 {
 	RationalFractions tmp;
 	tmp.numerator = numerator * F.numerator;
@@ -152,7 +158,7 @@ RationalFractions RationalFractions::multiplication(RationalFractions &F)//ум�
 	return tmp;
 }
 
-RationalFractions RationalFractions::separation(RationalFractions &F)//деление дробей
+RationalFractions RationalFractions::operator/(RationalFractions &F)//перегрузка оператора деления
 {
 	RationalFractions tmp;
 	tmp.numerator = numerator * F.denominator;
@@ -161,7 +167,22 @@ RationalFractions RationalFractions::separation(RationalFractions &F)//деле�
 	return tmp;
 }
 
-bool RationalFractions::compare(RationalFractions &F)//сравнение дробей
+RationalFractions RationalFractions::operator++(int) //перегрузка постфиксного инкремента
+{
+	RationalFractions tmp(*this);
+	numerator++;
+	denominator++;
+	return tmp;
+}
+
+RationalFractions RationalFractions::operator--() //перегрузка префиксного декремента
+{
+	numerator--;
+	denominator--;
+	return *this;
+}
+
+bool RationalFractions::operator==(RationalFractions &F)//перегрузка оператора сравнения
 {
 	if (((double)numerator / (double)denominator) == ((double)F.numerator / (double)F.denominator))
 	{
@@ -173,17 +194,41 @@ bool RationalFractions::compare(RationalFractions &F)//сравнение дро
 	}
 }
 
-double RationalFractions::decimal() // преобразование простой дроби в десятичную
+RationalFractions::operator double() // перегрузка оператора приведения к типу doudle
 {
-	double result = (double)numerator / (double)denominator;
-	return result;
+	return (double)numerator / (double)denominator;
 }
 
-void RationalFractions::setNameFraction(char *name)
+RationalFractions &RationalFractions::operator = (RationalFractions &F)//перегрузка оператора присваивания
+{
+	if ((*this) == F)
+		return *this;
+	delete[] nameFraction; //строки 206-208 можно не использовать. При использовании меняется имя результирующей дроби, т.к.отрабатывает конструктор копирования
+	nameFraction = new char[strlen(F.nameFraction) + 1];
+	strcpy_s(nameFraction, strlen(F.nameFraction) + 1, F.nameFraction);
+	numerator = F.numerator;
+	denominator = F.denominator;
+	return *this;
+}
+
+ostream& operator <<(ostream& out, RationalFractions& F)// перегрузка оператора вывода данных из потока
+{
+	out << F.numerator << "/" << F.denominator << " ";
+	return out;
+}
+
+istream& operator >> (istream& in, RationalFractions& F)// перегрузка оператора помещения данных в поток
+{
+	in >> F.numerator;
+	in >> F.denominator;
+	return in;
+}
+
+void RationalFractions::setNameFraction(char* name)
 {
 	delete[] nameFraction;
-	nameFraction = new char[strlen(name)+1];
-	strcpy_s (nameFraction, strlen(name)+1, name);
+	nameFraction = new char[strlen(name) + 1];
+	strcpy_s(nameFraction, strlen(name) + 1, name);
 }
 
 void RationalFractions::setNumerator(int num)//изменить числитель
