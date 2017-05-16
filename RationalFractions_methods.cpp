@@ -181,7 +181,9 @@ double RationalFractions::decimal() // преобразование просто
 
 void RationalFractions::setNameFraction(char *name)
 {
-	strcpy_s (nameFraction, 20, name);
+	delete[] nameFraction;
+	nameFraction = new char[strlen(name)+1];
+	strcpy_s (nameFraction, strlen(name)+1, name);
 }
 
 void RationalFractions::setNumerator(int num)//изменить числитель
