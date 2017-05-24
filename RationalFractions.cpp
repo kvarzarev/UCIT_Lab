@@ -53,27 +53,27 @@ void menu(RationalFractions &f1, RationalFractions &f2, RationalFractions &f3)
 		system("cls");
 		if (a == 1)
 		{
-			f3 = f1 + f2;
+			f3 = f1 + f2; //используем перегруженный оператор присваивания и перегруженный оператор сложения
 			outResult(a, f1, f2, f3);
 		}
 		else if (a == 2)
 		{
-			f3 = f1 - f2;
+			f3 = f1 - f2; //используем перегруженный оператор присваивания и перегруженный оператор вычитания
 			outResult(a, f1, f2, f3);
 		}
 		else if (a == 3)
 		{
-			f3 = f1 * f2;
+			f3 = f1 * f2; //используем перегруженный оператор присваивания и перегруженный оператор умножения
 			outResult(a, f1, f2, f3);
 		}
 		else if (a == 4)
 		{
-			f3 = f1 / f2;
+			f3 = f1 / f2; //используем перегруженный оператор присваивания и перегруженный оператор деления
 			outResult(a, f1, f2, f3);
 		}
 		else if (a == 5)
 		{
-			bool b = f1 == f2;
+			bool b = f1 == f2; // используем перегруженный оператор сравнения
 			if (b == true)
 			{
 				cout << "Дроби равны" << endl;
@@ -124,7 +124,7 @@ void setMenu(char *fname1, char *fname2, int &a, int &b, int &c, int &d)//мен
 {
 	int i;
 	do {
-		cout << "Выберите тип ввода данных:" << endl;
+		cout << "Выберите способ ввода данных:" << endl;
 		cout << "1 - из файла" << endl;
 		cout << "2 - с клавиатуры" << endl;
 		i = select();
@@ -132,19 +132,20 @@ void setMenu(char *fname1, char *fname2, int &a, int &b, int &c, int &d)//мен
 		{
 			setFile(fname1, fname2, a, b, c, d);
 			cout << "Данные из файла загружены" << endl;
+			system("pause");
 		}
 		else if (i == 2)
 		{
-			setFile(fname1, fname2, a, b, c, d);
+			setKeyboard(fname1, fname2, a, b, c, d);
 		}
 	} while ((i != 1) && (i != 2));
-	system("pause");
 }
 
 void outResult(int a, RationalFractions &f1, RationalFractions &f2, RationalFractions &f3)
 {
 	RationalFractions rezF(f3);
-	f1.getFraction();
+	cout << f1; // используем перегруженный оператор вывода данных из потока
+				//f1.getFraction(); // вместо метода вывода дроби на экран
 	if (a == 1)
 	{
 		cout << " + ";
@@ -161,10 +162,12 @@ void outResult(int a, RationalFractions &f1, RationalFractions &f2, RationalFrac
 	{
 		cout << " / ";
 	}
-	f2.getFraction();
+	cout << f2; // используем перегруженный оператор вывода данных из потока
+				//f2.getFraction(); // вместо метода вывода дроби на экран
 	cout << " = ";
-	rezF.getResult();
-	cout << "  или " << (double)f3 << endl;
+	cout << rezF; // используем перегруженный оператор вывода данных из потока
+				  //rezF.getResult(); // вместо метода вывода дроби на экран
+	cout << "  или " << (double)f3 << endl; // используем перегруженный оператор приведения к типу double
 }
 
 void setMenu(RationalFractions &f1, RationalFractions &f2, RationalFractions &f3)//меню редактирования дробей
@@ -252,22 +255,13 @@ void newFractions(RationalFractions &f1, RationalFractions  &f2, RationalFractio
 	ifstream in("dataFractions.txt");
 	in >> buff;
 	f1.setNameFraction(buff);
-	in >> a;
-	f1.setNumerator(a);
-	in >> a;
-	f1.setDenominator(a);
+	in >> f1; //используем перегруженный оператор для ввода данных в поток
 	in >> buff;
 	f2.setNameFraction(buff);
-	in >> a;
-	f2.setNumerator(a);
-	in >> a;
-	f2.setDenominator(a);
+	in >> f2; //используем перегруженный оператор для ввода данных в поток
 	in >> buff;
 	f3.setNameFraction(buff);
-	in >> a;
-	f3.setNumerator(a);
-	in >> a;
-	f3.setDenominator(a);
+	in >> f3; //используем перегруженный оператор для ввода данных в поток
 	in.close();
 }
 

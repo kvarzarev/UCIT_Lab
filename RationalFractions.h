@@ -17,7 +17,7 @@ public:
 	RationalFractions(const RationalFractions&F);//конструктор копирования
 	~RationalFractions(); //деструктор
 	static int GetCount(); // счетчик количества созданных объектов
-						   //Перегрузка операторов
+	//Перегрузка операторов
 	RationalFractions operator+(RationalFractions &); // перегрузка оператора сложения
 	RationalFractions operator-(RationalFractions &);// перегрузка оператора вычитания
 	RationalFractions operator*(RationalFractions &);// перегрузка оператора умножения

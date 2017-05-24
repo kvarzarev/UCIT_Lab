@@ -203,12 +203,19 @@ RationalFractions &RationalFractions::operator = (RationalFractions &F)//пер�
 {
 	if ((*this) == F)
 		return *this;
-	delete[] nameFraction; //строки 206-208 можно не использовать. При использовании меняется имя результирующей дроби, т.к.отрабатывает конструктор копирования
+	delete[] nameFraction;
 	nameFraction = new char[strlen(F.nameFraction) + 1];
 	strcpy_s(nameFraction, strlen(F.nameFraction) + 1, F.nameFraction);
 	numerator = F.numerator;
 	denominator = F.denominator;
 	return *this;
+}
+
+void RationalFractions::setNameFraction(char* name)
+{
+	delete[] nameFraction;
+	nameFraction = new char[strlen(name) + 1];
+	strcpy_s(nameFraction, strlen(name) + 1, name);
 }
 
 ostream& operator <<(ostream& out, RationalFractions& F)// перегрузка оператора вывода данных из потока
@@ -222,13 +229,6 @@ istream& operator >> (istream& in, RationalFractions& F)// перегрузка 
 	in >> F.numerator;
 	in >> F.denominator;
 	return in;
-}
-
-void RationalFractions::setNameFraction(char* name)
-{
-	delete[] nameFraction;
-	nameFraction = new char[strlen(name) + 1];
-	strcpy_s(nameFraction, strlen(name) + 1, name);
 }
 
 void RationalFractions::setNumerator(int num)//изменить числитель
