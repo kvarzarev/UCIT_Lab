@@ -18,10 +18,7 @@ RationalFractions::RationalFractions(char* name, int num, int den)// метод 
 	nameFraction = new char[strlen(name) + 1];
 	strcpy_s(nameFraction, strlen(name) + 1, name);
 	numerator = num;
-	if (den != 0) {
-		denominator = den;
-	}
-	else { denominator = 1; }
+	denominator = den;
 	count++;
 }
 
@@ -62,7 +59,7 @@ int RationalFractions::GetCount() //Счетчик Count
 
 void RationalFractions::getFraction()//вывод данных
 {
-	cout << numerator << "/" << denominator;
+	cout << nameFraction << " " << numerator << "/" << denominator << endl;
 }
 
 void RationalFractions::getResult()//вывод результатов вычислений в виде правильной простой дроби
@@ -115,6 +112,18 @@ int RationalFractions::NOK(int den1, int den2)//наименьшее общее 
 
 RationalFractions RationalFractions::operator+(RationalFractions & F)// перегрузка оператора сложения
 {
+	if ((denominator == 0) && (F.denominator == 0))
+	{
+		throw 3;
+	}
+	if (denominator == 0)
+	{
+		throw 1;
+	}
+	if (F.denominator == 0)
+	{
+		throw 2;
+	}
 	RationalFractions tmp;
 	if (denominator != F.denominator)
 	{
@@ -133,6 +142,18 @@ RationalFractions RationalFractions::operator+(RationalFractions & F)// пере
 
 RationalFractions RationalFractions::operator-(RationalFractions & F)//перегрузка оператора вычитания
 {
+	if ((denominator == 0) && (F.denominator == 0))
+	{
+		throw 3;
+	}
+	if (denominator == 0)
+	{
+		throw 1;
+	}
+	if (F.denominator == 0)
+	{
+		throw 2;
+	}
 	RationalFractions tmp;
 	if (denominator != F.denominator)
 	{
@@ -151,6 +172,18 @@ RationalFractions RationalFractions::operator-(RationalFractions & F)//пере�
 
 RationalFractions RationalFractions::operator*(RationalFractions &F)//перегрузка оператора умножения
 {
+	if ((denominator == 0) && (F.denominator == 0))
+	{
+		throw 3;
+	}
+	if (denominator == 0)
+	{
+		throw 1;
+	}
+	if (F.denominator == 0)
+	{
+		throw 2;
+	}
 	RationalFractions tmp;
 	tmp.numerator = numerator * F.numerator;
 	tmp.denominator = denominator * F.denominator;
@@ -160,6 +193,18 @@ RationalFractions RationalFractions::operator*(RationalFractions &F)//перег
 
 RationalFractions RationalFractions::operator/(RationalFractions &F)//перегрузка оператора деления
 {
+	if ((denominator == 0) && (F.denominator == 0))
+	{
+		throw 3;
+	}
+	if (denominator == 0)
+	{
+		throw 1;
+	}
+	if (F.denominator == 0)
+	{
+		throw 2;
+	}
 	RationalFractions tmp;
 	tmp.numerator = numerator * F.denominator;
 	tmp.denominator = denominator * F.numerator;
@@ -167,23 +212,20 @@ RationalFractions RationalFractions::operator/(RationalFractions &F)//перег
 	return tmp;
 }
 
-RationalFractions RationalFractions::operator++(int) //перегрузка постфиксного инкремента
-{
-	RationalFractions tmp(*this);
-	numerator++;
-	denominator++;
-	return tmp;
-}
-
-RationalFractions RationalFractions::operator--() //перегрузка префиксного декремента
-{
-	numerator--;
-	denominator--;
-	return *this;
-}
-
 bool RationalFractions::operator==(RationalFractions &F)//перегрузка оператора сравнения
 {
+	if ((denominator == 0) && (F.denominator == 0))
+	{
+		throw 3;
+	}
+	if (denominator == 0)
+	{
+		throw 1;
+	}
+	if (F.denominator == 0)
+	{
+		throw 2;
+	}
 	if (((double)numerator / (double)denominator) == ((double)F.numerator / (double)F.denominator))
 	{
 		return true;
@@ -194,18 +236,13 @@ bool RationalFractions::operator==(RationalFractions &F)//перегрузка �
 	}
 }
 
-RationalFractions::operator double() // перегрузка оператора приведения к типу doudle
-{
-	return (double)numerator / (double)denominator;
-}
-
 RationalFractions &RationalFractions::operator = (RationalFractions &F)//перегрузка оператора присваивания
 {
 	if ((*this) == F)
 		return *this;
-	delete[] nameFraction;
+	/*delete[] nameFraction;
 	nameFraction = new char[strlen(F.nameFraction) + 1];
-	strcpy_s(nameFraction, strlen(F.nameFraction) + 1, F.nameFraction);
+	strcpy_s(nameFraction, strlen(F.nameFraction) + 1, F.nameFraction);*/
 	numerator = F.numerator;
 	denominator = F.denominator;
 	return *this;
@@ -254,4 +291,103 @@ int RationalFractions::getDenominator()
 int RationalFractions::getNumerator()
 {
 	return numerator;
+}
+
+
+//-----------------------------------------------------------------------------------------//
+//  МЕТОДЫ ДЛЯ  КЛАССОВ-НАСЛЕДНИКОВ  //
+//----------------------------------------------------------------------------------------//
+//  Методы для класса "Результат"  //
+
+Rezult::Rezult() :RationalFractions() //конструктор по умолчанию	
+{
+	setNameFraction("Rezult");
+	rezult = 0;
+}
+
+Rezult::Rezult(double rez) :RationalFractions() //конструктор с параметрами
+{
+	rezult = rez;
+}
+
+void Rezult::getFraction()
+{
+	cout << getNameFraction() << " " << rezult << endl;
+}
+
+Rezult &Rezult::operator = (RationalFractions &R)//перегрузка оператора присваивания
+{
+	if ((*this) == R)
+		return *this;
+	rezult = (double)R.getNumerator() / (double)R.getDenominator();
+	return *this;
+}
+
+ostream& operator <<(ostream& out, Rezult& R)// перегрузка оператора вывода данных из потока
+{
+	out << R.rezult;
+	return out;
+}
+
+istream& operator >> (istream& in, Rezult& R)// перегрузка оператора помещения данных в поток
+{
+	in >> R.rezult;
+	return in;
+}
+
+//--------------------------------------------------------------------------------------------//
+//      Методы для класса "Смешанная дробь"      //
+
+MixedFraction::MixedFraction() :RationalFractions() //конструктор по умолчанию
+{
+	setNameFraction("Mixed");
+	integer = 0;
+	setNumerator(0);
+	setDenominator(1);
+}
+
+MixedFraction::MixedFraction(int whole) :RationalFractions()//конструктор с параметрами-1
+{
+	setNameFraction("Mixed");
+	integer = whole;
+	setNumerator(1);
+	setDenominator(1);
+}
+
+MixedFraction::MixedFraction(int whole, int num, int den) :RationalFractions()//конструктор с параметрами-2
+{
+	setNameFraction("Mixed");
+	integer = whole;
+	setNumerator(num);
+	setDenominator(den);
+}
+
+void MixedFraction::getFraction()//вывод результатов вычислений в виде правильной смешанной дроби
+{
+	integer = integer + (getNumerator() / getDenominator());
+	setNumerator(getNumerator() % getDenominator());
+	cout << getNameFraction() << " " << integer << " " << getNumerator() << "/" << getDenominator() << endl;
+}
+
+MixedFraction &MixedFraction::operator = (RationalFractions &F)//перегрузка оператора присваивания
+{
+	if ((*this) == F)
+		return *this;
+	setNumerator(F.getNumerator());
+	setDenominator(F.getDenominator());
+	integer = F.getNumerator() / F.getDenominator();
+	setNumerator(F.getNumerator() % F.getDenominator());
+	return *this;
+}
+
+ostream& operator <<(ostream& out, MixedFraction& M)// перегрузка оператора вывода данных из потока
+{
+	out << M.integer << " " << M.getNumerator() << "/" << M.getDenominator();
+	return out;
+}
+
+istream& operator >> (istream&in, MixedFraction& M)//перегрузка оператора cin
+{
+	in >> M.integer;
+	return in;
 }
